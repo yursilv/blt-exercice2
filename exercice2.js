@@ -6,10 +6,10 @@ function toDisplayFormat(x, y) {
 	return letters[x-1] + y;
 }
 
-// given a certain position returns a string containing the possible moves for the knight
+// given a certain position returns a string containing possible moves for the knight
 function getNextPositions(positionCoordinates) {
 	let newPositionsString = '';
-	for (let i = 0; i < knightMoves.length; i += 1) {
+	for (let i = 0; i < knightMoves.length; i++) {
 		const newX = positionCoordinates.x + knightMoves[i][0];
 		const newY = positionCoordinates.y + knightMoves[i][1];
 		if ((1 <= newX && newX <= 8) && (1 <= newY && newY <= 8)) {
@@ -27,8 +27,25 @@ function fromDisplayFormat(displayFormat) {
 	return {x: x, y: y};
 }
 
+// checking user input for errors
+function inputCheck(displayFormat) {
+	let noErrors = true;
+	const xLetter = displayFormat.toUpperCase().charAt(0);
+	let x = letters.indexOf(xLetter);
+	let y = displayFormat.charAt(1);
+	if (x === -1 || isNaN(y) || y < 1 || y > 8) {
+		noErrors = false;
+	}
+	return noErrors;
+}
+
 function showNextPositions(displayFormat) {
-	const positionCoordinates = fromDisplayFormat(displayFormat);
-	const newPositionsString = getNextPositions(positionCoordinates);
-  	alert("Возможные варианты хода:\n\n" + newPositionsString);
+	if (inputCheck(displayFormat)) {
+		document.getElementById("error").style.visibility = "hidden";
+		const positionCoordinates = fromDisplayFormat(displayFormat);
+		const newPositionsString = getNextPositions(positionCoordinates);
+	  	alert("Возможные варианты хода:\n\n" + newPositionsString);
+	} else {
+		document.getElementById("error").style.visibility = "visible";
+	}
 }

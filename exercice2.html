@@ -7,10 +7,11 @@
 		<script src="exercice2.js"></script>
 	</head>
 	<body>
-		<form name="chessForm" method="post" class="chessForm">
+		<form name="chessForm" class="chessForm" action="javascript:void(0);" onsubmit="showNextPositions(position.value)">
 			<strong>Исходное положение</strong><br>
 			<input type="text" name="position"><br><br>
-			<input type="submit" value="Ок" onclick="showNextPositions(position.value)">
+			<input type="submit" value="Ок">
 		</form>
+		<p style="visibility: hidden" id="error">Пожалуйста, введите шахматную позицию в корректном формате (пр. E6)</p>
 	</body>
 </html>
